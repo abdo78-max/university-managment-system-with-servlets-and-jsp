@@ -36,15 +36,19 @@ public class GetProfessorCoursesServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String action = request.getParameter("action");
         response.setContentType("text/html;charset=UTF-8");
         Connection connect = (Connection) getServletContext().getAttribute("db connection");
-        ProfessorDao professorDao=new ProfessorDao(connect);
+        ProfessorDao professorDao = new ProfessorDao(connect);
         Professor professor = (Professor) request.getSession().getAttribute("professor");
         Set<Course> professorCourses = professorDao.getProfessorCourses(professor);
         professor.setCourses(professorCourses);
         request.getSession().setAttribute("professor", professor);
+         if ("delete".equalsIgnoreCase(action)) {
+            response.sendRedirect("deleteteaching2.jsp");
+            return;
+        }
         response.sendRedirect("updateteaching2.jsp");
-
 //        try (PrintWriter out = response.getWriter()) {
 //            /* TODO output your page here. You may use following sample code. */
 //            out.println("<!DOCTYPE html>");

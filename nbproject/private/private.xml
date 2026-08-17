@@ -73,6 +73,15 @@
             <file>file:/G:/UniversityManagmentSystem/web/updateteaching2.jsp</file>
             <file>file:/G:/UniversityManagmentSystem/src/java/servlets/GetProfessorCoursesServlet.java</file>
             <file>file:/G:/UniversityManagmentSystem/src/java/servlets/UpdateTeachingServlet.java</file>
+            <file>file:/G:/UniversityManagmentSystem/src/java/servlets/CountStudentsServlet.java</file>
+            <file>file:/G:/UniversityManagmentSystem/src/java/data/Student.java</file>
+            <file>file:/G:/UniversityManagmentSystem/src/java/servlets/CountProfessorsServlet.java</file>
+            <file>file:/G:/UniversityManagmentSystem/src/java/servlets/CountCoursesServlet.java</file>
+            <file>file:/G:/UniversityManagmentSystem/src/java/data/Role.java</file>
+            <file>file:/G:/UniversityManagmentSystem/src/java/data/User.java</file>
+            <file>file:/G:/UniversityManagmentSystem/web/searchstudent.jsp</file>
+            <file>file:/G:/UniversityManagmentSystem/web/searchprofessor.jsp</file>
+            <file>file:/G:/UniversityManagmentSystem/web/searchcourse.jsp</file>
         </group>
     </open-files>
 </project-private>

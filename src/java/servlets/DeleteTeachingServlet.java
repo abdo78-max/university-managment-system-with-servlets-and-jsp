@@ -4,20 +4,23 @@
  */
 package servlets;
 
-import dao.ProfessorDao;
-import data.Professor;
 import java.io.IOException;
+import java.sql.Connection;
+
+import dao.TeachingDao;
+import data.Course;
+import data.Professor;
+import data.Teaching;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.sql.Connection;
 
 /**
  *
  * @author Compu City
  */
-public class SearchProfessorById extends HttpServlet {
+public class DeleteTeachingServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,34 +36,30 @@ public class SearchProfessorById extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         Connection connect = (Connection) getServletContext().getAttribute("db connection");
         String professorId = request.getParameter("professorid");
-        String action = request.getParameter("action");
-        ProfessorDao professorDao = new ProfessorDao(connect);
-        Professor professor = new Professor(Integer.parseInt(professorId));
-        Professor selectedProfessor = professorDao.searchProfessorById(professor);
-        if (selectedProfessor != null) {
-            request.getSession().setAttribute("professor", selectedProfessor);
-            if ("assign".equalsIgnoreCase(action)) {
-                request.getRequestDispatcher("assignprofessortocourse2.jsp").forward(request, response);
-            } else if ("updateprofessorteachingcourse".equals(action)) {
-                request.getRequestDispatcher("GetProfessorCoursesServlet").forward(request, response);
-            } else if ("delete".equalsIgnoreCase(action)) {
-                request.getRequestDispatcher("GetProfessorCoursesServlet").forward(request, response);
-            } else {
-                request.getRequestDispatcher("updateprofessor2.jsp").forward(request, response);
-            }
-        } else {
-            request.setAttribute("message", "professor is not found");
-            request.getRequestDispatcher("updateprofessor.jsp").forward(request, response);
+        String courseId = request.getParameter("courseid");
+        Professor professor=new Professor(Integer.parseInt(professorId));
+        Course course=new Course(Integer.parseInt(courseId));
+        Teaching teaching =new Teaching(professor,course);
+        TeachingDao teachingDao=new TeachingDao(connect);
+        int resTeaching=teachingDao.deleteTeaching(teaching);
+        if(resTeaching==1){
+            request.getSession().setAttribute("message", "Teaching has been deleted");
         }
+        else
+        {
+            request.getSession().setAttribute("message", "failed to delete teaching");
+        }
+        response.sendRedirect("deleteteaching2.jsp");
+
 //        try (PrintWriter out = response.getWriter()) {
 //            /* TODO output your page here. You may use following sample code. */
 //            out.println("<!DOCTYPE html>");
 //            out.println("<html>");
 //            out.println("<head>");
-//            out.println("<title>Servlet SearchProfessorById</title>");
+//            out.println("<title>Servlet DeleteTeachingServlet</title>");
 //            out.println("</head>");
 //            out.println("<body>");
-//            out.println("<h1>Servlet SearchProfessorById at " + request.getContextPath() + "</h1>");
+//            out.println("<h1>Servlet DeleteTeachingServlet at " + request.getContextPath() + "</h1>");
 //            out.println("</body>");
 //            out.println("</html>");
 //        }

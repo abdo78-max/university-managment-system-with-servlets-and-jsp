@@ -232,6 +232,10 @@
         <servlet-name>CountCoursesServlet</servlet-name>
         <servlet-class>servlets.CountCoursesServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeleteTeachingServlet</servlet-name>
+        <servlet-class>servlets.DeleteTeachingServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SignUpServlet</servlet-name>
         <url-pattern>/SignUpServlet</url-pattern>
@@ -327,6 +331,10 @@
     <servlet-mapping>
         <servlet-name>CountCoursesServlet</servlet-name>
         <url-pattern>/CountCoursesServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteTeachingServlet</servlet-name>
+        <url-pattern>/DeleteTeachingServlet</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>signup.jsp</welcome-file>

@@ -30,6 +30,10 @@
     <a href="deleteprofessor.jsp" style="text-align: center;">go to delete professor</a><br><br>    
     <a href="assignprofessortocourse1.jsp" style="text-align: center;">assign professor to course</a><br><br>    
     <a href="updateteaching.jsp" style="text-align: center;">update the professor's teaching course</a><br><br>    
+    <a href="searchstudent.jsp" style="text-align: center;">search student here</a><br><br>    
+    <a href="searchprofessor.jsp" style="text-align: center;">search professor here</a><br><br>    
+    <a href="searchcourse.jsp" style="text-align: center;">search course here</a><br><br>    
+    <a href="deleteteaching.jsp" style="text-align: center;">delete professor's teaching course here</a><br><br>    
 
 </head>
 <body>

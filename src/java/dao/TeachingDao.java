@@ -54,7 +54,7 @@ public class TeachingDao {
         }
         return result;
     }
-    public  Teaching SearchTeaching(Teaching teaching) {
+    public  Teaching searchTeaching(Teaching teaching) {
         sql = "select professorid,courseid from `professor-course` where professorid=? and courseid=?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setInt(1, teaching.getProfessor().getId());
@@ -72,5 +72,17 @@ public class TeachingDao {
             Logger.getLogger(TeachingDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+    public int deleteTeaching(Teaching teaching) {
+        int result = 0;
+        sql = "delete from `professor-course` where professorid=? and courseid=?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, teaching.getProfessor().getId());
+            preparedStatement.setInt(2, teaching.getCourse().getCourseId());
+            result = preparedStatement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(TeachingDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
     }
 }
