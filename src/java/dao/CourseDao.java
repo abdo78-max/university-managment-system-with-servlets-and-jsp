@@ -100,17 +100,19 @@ public class CourseDao {
         return null;
     }
 
-    public Course searchCourseByTitle(Course course) {
+    public ArrayList<Course> searchCourseByTitle(Course course) {
+        ArrayList<Course> courses = new ArrayList<>();
         sql = "select * from university.course where coursename like ?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setString(1, "%" + course.getCourseName() + "%");
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                if (resultSet.next()) {
+                while (resultSet.next()) {
                     int courseId = resultSet.getInt("courseid");
                     String courseName = resultSet.getString("courseName");
                     int creditHours = resultSet.getInt("credit_hours");
-                    return new Course(courseId, courseName, creditHours);
+                    courses.add(new Course(courseId, courseName, creditHours));
                 }
+                return courses;
             }
         } catch (SQLException ex) {
             Logger.getLogger(CourseDao.class.getName()).log(Level.SEVERE, null, ex);

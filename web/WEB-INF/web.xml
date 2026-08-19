@@ -132,6 +132,22 @@
         <filter-name>DashBoardFilter</filter-name>
         <url-pattern>/assignprofessortocourse2.jsp</url-pattern>
     </filter-mapping>
+    <filter-mapping>
+        <filter-name>DashBoardFilter</filter-name>
+        <url-pattern>/searchstudent.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>DashBoardFilter</filter-name>
+        <url-pattern>/searchstudent2.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>DashBoardFilter</filter-name>
+        <url-pattern>/searchprofessor.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>DashBoardFilter</filter-name>
+        <url-pattern>/searchcourse.jsp</url-pattern>
+    </filter-mapping>
     <listener>
         <description>ServletContextListener</description>
         <listener-class>listeners.DatabaseListener</listener-class>
@@ -221,24 +237,24 @@
         <servlet-class>servlets.UpdateTeachingServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>CountStudentsServlet</servlet-name>
-        <servlet-class>servlets.CountStudentsServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>CountProfessorsServlet</servlet-name>
-        <servlet-class>servlets.CountProfessorsServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>CountCoursesServlet</servlet-name>
-        <servlet-class>servlets.CountCoursesServlet</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>DeleteTeachingServlet</servlet-name>
         <servlet-class>servlets.DeleteTeachingServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>SearchStudentByName</servlet-name>
         <servlet-class>servlets.SearchStudentByName</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchCourseByName</servlet-name>
+        <servlet-class>servlets.SearchCourseByName</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchProfessorByName</servlet-name>
+        <servlet-class>servlets.SearchProfessorByName</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CountServlet</servlet-name>
+        <servlet-class>servlets.CountServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>SignUpServlet</servlet-name>
@@ -325,24 +341,24 @@
         <url-pattern>/UpdateTeachingServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>CountStudentsServlet</servlet-name>
-        <url-pattern>/CountStudentsServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>CountProfessorsServlet</servlet-name>
-        <url-pattern>/CountProfessorsServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>CountCoursesServlet</servlet-name>
-        <url-pattern>/CountCoursesServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>DeleteTeachingServlet</servlet-name>
         <url-pattern>/DeleteTeachingServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SearchStudentByName</servlet-name>
         <url-pattern>/SearchStudentByName</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchCourseByName</servlet-name>
+        <url-pattern>/SearchCourseByName</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchProfessorByName</servlet-name>
+        <url-pattern>/SearchProfessorByName</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CountServlet</servlet-name>
+        <url-pattern>/CountServlet</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>signup.jsp</welcome-file>

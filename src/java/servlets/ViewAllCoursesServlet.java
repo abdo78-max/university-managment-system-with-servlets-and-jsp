@@ -43,7 +43,7 @@ public class ViewAllCoursesServlet extends HttpServlet {
         if (student != null) {
             request.getRequestDispatcher("GetStudentCoursesServlet").forward(request, response);
         } else if (user != null) {
-            request.getRequestDispatcher("CountCoursesServlet").forward(request, response);
+            request.getRequestDispatcher("CountServlet").forward(request, response);
         }
 //        try (PrintWriter out = response.getWriter()) {
 //            /* TODO output your page here. You may use following sample code. */

@@ -9,9 +9,17 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>enter here professor name to search</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+          <form action="SearchProfessorByName" method="GET">
+        professor name:<input type="text" name="professorname" value="" />
+        <input type="submit" value="submit" />
+                <%String message = (String) request.getAttribute("message");
+                            if (message != null) {%>
+
+            <label> <%=message%></label>
+            <%}%>
+        </form>
     </body>
 </html>

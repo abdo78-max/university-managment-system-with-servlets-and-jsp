@@ -89,4 +89,17 @@ public class EnrollmentDao {
         }
         return result;
     }
+
+    public int countEnrollments() {
+        int count = 0;
+        sql = "select count(*) as 'total enrollments' from `student-course`";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql); ResultSet resultSet = preparedStatement.executeQuery()) {
+            if (resultSet.next()) {
+                count = resultSet.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(EnrollmentDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return count;
+    }
 }

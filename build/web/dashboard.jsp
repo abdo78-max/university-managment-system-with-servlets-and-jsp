@@ -21,6 +21,11 @@
 
     <h3>عدد الكورسات</h3>
     <%=session.getAttribute("coursecounter")%><br><br>
+    <h3> عدد التسجيلات</h3>
+    <%=session.getAttribute("enrollmentcounter")%><br><br>
+    <h3> عددالمدرسين الذين يعطون كورسات </h3>
+    <%=session.getAttribute("teachingcounter")%><br><br>
+
     <a href="course.jsp" style="text-align: center;">go to add course</a><br><br>    
     <a href="updatecourse.jsp" style="text-align: center;">go to update course</a><br><br>    
     <a href="deletecourse.jsp" style="text-align: center;">go to delete course</a><br><br>    

@@ -4,12 +4,15 @@
  */
 package servlets;
 
+import dao.StudentDao;
+import data.Student;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.sql.Connection;
+import java.util.ArrayList;
 
 /**
  *
@@ -29,18 +32,37 @@ public class SearchStudentByName extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet SearchStudentByName</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet SearchStudentByName at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        Connection connect = (Connection) getServletContext().getAttribute("db connection");
+        String studentName = request.getParameter("studentname");
+        if (studentName == null || studentName.trim().isEmpty()) {
+            request.setAttribute("message", " you should only one charcter for the student you search");
+            request.getRequestDispatcher("searchstudent.jsp").forward(request, response);
+            return;
+
         }
+        Student student = new Student(studentName);
+        StudentDao studentDao = new StudentDao(connect);
+        ArrayList<Student> students = studentDao.searchStudentByName(student);
+        if (!students.isEmpty()) {
+            request.getSession().setAttribute("students", students);
+            request.getRequestDispatcher("searchstudent2.jsp").forward(request, response);
+        } else {
+            request.setAttribute("message", "the student is not found ");
+            request.getRequestDispatcher("searchstudent.jsp").forward(request, response);
+
+        }
+//        try (PrintWriter out = response.getWriter()) {
+//            /* TODO output your page here. You may use following sample code. */
+//            out.println("<!DOCTYPE html>");
+//            out.println("<html>");
+//            out.println("<head>");
+//            out.println("<title>Servlet SearchStudentByName</title>");
+//            out.println("</head>");
+//            out.println("<body>");
+//            out.println("<h1>Servlet SearchStudentByName at " + request.getContextPath() + "</h1>");
+//            out.println("</body>");
+//            out.println("</html>");
+//        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
