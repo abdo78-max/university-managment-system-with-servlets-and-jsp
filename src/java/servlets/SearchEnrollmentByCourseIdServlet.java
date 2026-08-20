@@ -4,20 +4,24 @@
  */
 package servlets;
 
-import dao.CourseDao;
+import dao.EnrollmentDao;
 import data.Course;
+import data.Enrollment;
+import data.Student;
 import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.sql.Connection;
+import java.util.ArrayList;
 
 /**
  *
  * @author Compu City
  */
-public class DeleteCourseServlet extends HttpServlet {
+public class SearchEnrollmentByCourseIdServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,29 +39,29 @@ public class DeleteCourseServlet extends HttpServlet {
         String courseId = request.getParameter("courseid");
         String message = (String) request.getAttribute("message");
         if (message != null) {
-            request.getRequestDispatcher("deletecourse.jsp").forward(request, response);
+            request.getRequestDispatcher("searchenrollmentbycourseid.jsp").forward(request, response);
             return;
         }
-        CourseDao courseDao = new CourseDao(connect);
         Course course = new Course(Integer.parseInt(courseId));
-
-        int resCourse = courseDao.deleteCourse(course);
-        if (resCourse == 1) {
-            request.getSession().setAttribute("message", "you successed to delete this course");
+        Enrollment enrollment = new Enrollment(course);
+        EnrollmentDao enrollmentDao = new EnrollmentDao(connect);
+        ArrayList<Enrollment> selectedEnrollments = enrollmentDao.searchEnrollmentByCourseId(enrollment);
+        if (selectedEnrollments != null) {
+            request.getSession().setAttribute("enrollments", selectedEnrollments);
+            request.getRequestDispatcher("searchenrollmentbystudentidandcourseid2.jsp").forward(request, response);
         } else {
-            request.getSession().setAttribute("message", "you failed to delete this course");
+            request.setAttribute("message", "the enrollments is empty");
+            request.getRequestDispatcher("searchenrollmentbycourseid.jsp").forward(request, response);
         }
-
-        response.sendRedirect("deletecourse.jsp");
 //        try (PrintWriter out = response.getWriter()) {
 //            /* TODO output your page here. You may use following sample code. */
 //            out.println("<!DOCTYPE html>");
 //            out.println("<html>");
 //            out.println("<head>");
-//            out.println("<title>Servlet DeleteCourseServlet</title>");
+//            out.println("<title>Servlet SearchEnrollmentByCourseIdServlet</title>");
 //            out.println("</head>");
 //            out.println("<body>");
-//            out.println("<h1>Servlet DeleteCourseServlet at " + request.getContextPath() + "</h1>");
+//            out.println("<h1>Servlet SearchEnrollmentByCourseIdServlet at " + request.getContextPath() + "</h1>");
 //            out.println("</body>");
 //            out.println("</html>");
 //        }

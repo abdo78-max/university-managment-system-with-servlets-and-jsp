@@ -11,6 +11,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -57,7 +59,7 @@ public class EnrollmentDao {
         return result;
     }
 
-    public Enrollment SearchEnrollment(Enrollment enrollment) {
+    public Enrollment searchEnrollment(Enrollment enrollment) {
         sql = "select studentid,courseid from `student-course` where studentid=? and courseid=?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setInt(1, enrollment.getStudent().getId());
@@ -77,7 +79,7 @@ public class EnrollmentDao {
         return null;
     }
 
-    public int DeleteEnrollment(Enrollment enrollment) {
+    public int deleteEnrollment(Enrollment enrollment) {
         int result = 0;
         sql = "delete from `student-course` where studentid=? and courseid=?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
@@ -101,5 +103,63 @@ public class EnrollmentDao {
             Logger.getLogger(EnrollmentDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         return count;
+    }
+
+    public ArrayList<Enrollment> searchEnrollmentByStudentId(Enrollment enrollment) {
+        ArrayList<Enrollment> enrollments = new ArrayList<>();
+        sql = "select enrollmentid,coursename,birthdate,enrollmentdate,email,mark,phone,sc.studentid,sc.courseid,studentname from student s join `student-course` sc on s.studentid=sc.studentid join course c on c.courseid=sc.courseid where sc.studentid=?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, enrollment.getStudent().getId());
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    int enrollmentId = resultSet.getInt("enrollmentid");
+                    int studentId = resultSet.getInt("studentid");
+                    int courseId = resultSet.getInt("courseid");
+                    String studentName = resultSet.getString("studentname");
+                    String courseName = resultSet.getString("coursename");
+                    LocalDate enrollmentDate = resultSet.getDate("enrollmentdate").toLocalDate();
+                    LocalDate birthDate = resultSet.getDate("birthdate").toLocalDate();
+                    double mark = resultSet.getDouble("mark");
+                    String phone = resultSet.getString("phone");
+                    String email = resultSet.getString("email");
+                    Student student = new Student(studentId, studentName, email, birthDate, phone);
+                    Course course = new Course(courseId, courseName);
+                    enrollments.add(new Enrollment(enrollmentId, student, course, enrollmentDate, mark));
+                }
+                return enrollments;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(EnrollmentDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    public ArrayList<Enrollment> searchEnrollmentByCourseId(Enrollment enrollment) {
+        ArrayList<Enrollment> enrollments = new ArrayList<>();
+        sql = "select enrollmentid,studentname,phone,email,birthdate,coursename,enrollmentdate,mark,sc.studentid,sc.courseid from student s join `student-course` sc on s.studentid=sc.studentid join course c on c.courseid=sc.courseid where sc.courseid=?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, enrollment.getCourse().getCourseId());
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    int enrollmentId = resultSet.getInt("enrollmentid");
+                    int studentId = resultSet.getInt("studentid");
+                    int courseId = resultSet.getInt("courseid");
+                    String studentName = resultSet.getString("studentname");
+                    String courseName = resultSet.getString("coursename");
+                    LocalDate enrollmentDate = resultSet.getDate("enrollmentdate").toLocalDate();
+                    LocalDate birthDate = resultSet.getDate("birthdate").toLocalDate();
+                    double mark = resultSet.getDouble("mark");
+                    String phone = resultSet.getString("phone");
+                    String email = resultSet.getString("email");
+                    Student student = new Student(studentId, studentName, email, birthDate, phone);
+                    Course course = new Course(courseId, courseName);
+                    enrollments.add(new Enrollment(enrollmentId, student, course, enrollmentDate, mark));
+                }
+                return enrollments;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(EnrollmentDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 }

@@ -6,11 +6,12 @@ package dao;/*
 import data.Course;
 import data.Professor;
 import data.Teaching;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -96,8 +97,64 @@ public class TeachingDao {
                 count = resultSet.getInt(1);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(EnrollmentDao.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TeachingDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         return count;
+    }
+
+    public ArrayList<Teaching> searchTeachingByProfessorId(Teaching teaching) {
+        ArrayList<Teaching> teachingList = new ArrayList<>();
+        sql = "select pc.professorid,pc.courseid,professorname,coursename,birthdate,specialization,phone,email from `professor-course`  pc join professor p on pc.professorid=p.professorid join course c on pc.courseid=c.courseid where pc.professorid=?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, teaching.getProfessor().getId());
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    int professorId = resultSet.getInt("professorid");
+                    int courseid = resultSet.getInt("courseid");
+                    String professorname = resultSet.getString("professorname");
+                    String coursename = resultSet.getString("coursename");
+                    LocalDate birthdate = resultSet.getDate("birthdate").toLocalDate();
+                    String specialization = resultSet.getString("specialization");
+                    String phone = resultSet.getString("phone");
+                    String email = resultSet.getString("email");
+                    Professor professor = new Professor(specialization, professorId, professorname, email, birthdate, phone);
+                    Course course = new Course(courseid, coursename);
+                    teachingList.add(new Teaching(professor, course));
+                }
+            }
+            return teachingList;
+        } catch (SQLException ex) {
+            Logger.getLogger(TeachingDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+
+    }
+
+    public ArrayList<Teaching> searchTeachingByCourseId(Teaching teaching) {
+        ArrayList<Teaching> teachingList = new ArrayList<>();
+        sql = "select pc.professorid,pc.courseid,professorname,coursename,birthdate,specialization,phone,email from `professor-course`  pc join professor p on pc.professorid=p.professorid join course c on pc.courseid=c.courseid where pc.courseid=?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, teaching.getCourse().getCourseId());
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    int professorId = resultSet.getInt("professorid");
+                    int courseid = resultSet.getInt("courseid");
+                    String professorname = resultSet.getString("professorname");
+                    String coursename = resultSet.getString("coursename");
+                    LocalDate birthdate = resultSet.getDate("birthdate").toLocalDate();
+                    String specialzation = resultSet.getString("specialization");
+                    String phone = resultSet.getString("phone");
+                    String email = resultSet.getString("email");
+                    Professor professor = new Professor(specialzation, professorId, professorname, email, birthdate, phone);
+                    Course course = new Course(courseid, coursename);
+                    teachingList.add(new Teaching(professor, course));
+                }
+                return teachingList;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(TeachingDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+
     }
 }

@@ -105,23 +105,15 @@ public class SearchProfessorIdFilter implements Filter {
         String professorId = request.getParameter("professorid");
         if (professorId == null || professorId.trim().isEmpty()) {
             request.setAttribute("message", "you must enter positive numbers");
-            request.getRequestDispatcher("updateprofessor.jsp").forward(request, response);
-            return;
         }
-        boolean isNumber = true;
         for (int i = 0; i < professorId.length(); i++) {
             if (!Character.isDigit(professorId.charAt(i))) {
-                isNumber = false;
-                break;
+                request.setAttribute("message", "you must enter a positive number");
+                chain.doFilter(request, response);
+                return;
             }
         }
-        if (isNumber) {
-            chain.doFilter(request, response);
-
-        } else {
-            request.setAttribute("message", "you must enter positive numbers");
-            request.getRequestDispatcher("updateprofessor.jsp").forward(request, response);
-        }
+        chain.doFilter(request, response);
         doBeforeProcessing(request, response);
 
         Throwable problem = null;

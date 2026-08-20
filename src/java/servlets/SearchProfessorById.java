@@ -34,6 +34,20 @@ public class SearchProfessorById extends HttpServlet {
         Connection connect = (Connection) getServletContext().getAttribute("db connection");
         String professorId = request.getParameter("professorid");
         String action = request.getParameter("action");
+        String message = (String) request.getAttribute("message");
+        if (message != null) {
+            if ("assign".equalsIgnoreCase(action)) {
+                request.getRequestDispatcher("assignprofessortocourse1.jsp").forward(request, response);
+            } else if ("updateprofessorteachingcourse".equals(action)) {
+                request.getRequestDispatcher("updateteaching.jsp").forward(request, response);
+            } else if ("delete".equals(action)) {
+                request.getRequestDispatcher("deleteteaching.jsp").forward(request, response);
+            } else {
+                request.getRequestDispatcher("updateprofessor.jsp").forward(request, response);
+
+            }
+            return;
+        }
         ProfessorDao professorDao = new ProfessorDao(connect);
         Professor professor = new Professor(Integer.parseInt(professorId));
         Professor selectedProfessor = professorDao.searchProfessorById(professor);

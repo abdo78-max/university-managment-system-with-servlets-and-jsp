@@ -4,20 +4,22 @@
  */
 package servlets;
 
-import dao.CourseDao;
+import dao.TeachingDao;
 import data.Course;
+import data.Teaching;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.sql.Connection;
+import java.util.ArrayList;
 
 /**
  *
  * @author Compu City
  */
-public class DeleteCourseServlet extends HttpServlet {
+public class SearchTeachingByCourseId extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,29 +37,24 @@ public class DeleteCourseServlet extends HttpServlet {
         String courseId = request.getParameter("courseid");
         String message = (String) request.getAttribute("message");
         if (message != null) {
-            request.getRequestDispatcher("deletecourse.jsp").forward(request, response);
+            request.getRequestDispatcher("searchteachingbycourseid.jsp").forward(request, response);
             return;
         }
-        CourseDao courseDao = new CourseDao(connect);
         Course course = new Course(Integer.parseInt(courseId));
-
-        int resCourse = courseDao.deleteCourse(course);
-        if (resCourse == 1) {
-            request.getSession().setAttribute("message", "you successed to delete this course");
-        } else {
-            request.getSession().setAttribute("message", "you failed to delete this course");
-        }
-
-        response.sendRedirect("deletecourse.jsp");
+        Teaching teaching = new Teaching(course);
+        TeachingDao teachingDao = new TeachingDao(connect);
+        ArrayList<Teaching> teachingList = teachingDao.searchTeachingByCourseId(teaching);
+        request.getSession().setAttribute("teaching", teachingList);
+        request.getRequestDispatcher("searchteachingbyprofessoridandcourseid2.jsp").forward(request, response);
 //        try (PrintWriter out = response.getWriter()) {
 //            /* TODO output your page here. You may use following sample code. */
 //            out.println("<!DOCTYPE html>");
 //            out.println("<html>");
 //            out.println("<head>");
-//            out.println("<title>Servlet DeleteCourseServlet</title>");
+//            out.println("<title>Servlet SearchTeachingByCourseId</title>");
 //            out.println("</head>");
 //            out.println("<body>");
-//            out.println("<h1>Servlet DeleteCourseServlet at " + request.getContextPath() + "</h1>");
+//            out.println("<h1>Servlet SearchTeachingByCourseId at " + request.getContextPath() + "</h1>");
 //            out.println("</body>");
 //            out.println("</html>");
 //        }

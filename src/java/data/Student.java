@@ -31,6 +31,10 @@ public class Student extends Person {
         super(id, name);
     }
 
+    public Student(int id, String name, String email, LocalDate birthDate, String phone) {
+        super(id, name, email, birthDate, phone);
+    }
+
     public Set<Course> getCourses() {
         return courses;
     }

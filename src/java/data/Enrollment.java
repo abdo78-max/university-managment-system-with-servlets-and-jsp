@@ -26,11 +26,19 @@ public class Enrollment {
         this.mark = mark;
     }
 
+    public Enrollment(Student student) {
+        this.student = student;
+    }
+
     public Enrollment(int enrollmentId, Student student, Course course, LocalDate enrollmentDate) {
         this.enrollmentId = enrollmentId;
         this.student = student;
         this.course = course;
         this.enrollmentDate = enrollmentDate;
+    }
+
+    public Enrollment(Course course) {
+        this.course = course;
     }
 
     public Enrollment(Student student, Course course, LocalDate enrollmentDate) {

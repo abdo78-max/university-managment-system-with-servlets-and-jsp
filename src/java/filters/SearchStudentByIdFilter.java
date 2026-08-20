@@ -97,25 +97,18 @@ public class SearchStudentByIdFilter implements Filter {
             FilterChain chain)
             throws IOException, ServletException {
         String studentId = request.getParameter("studentid");
-        boolean isNumber = true;
         if (studentId == null || studentId.trim().isEmpty()) {
             request.setAttribute("message", "you must enter positive numbers");
-            request.getRequestDispatcher("updatestudent.jsp").forward(request, response);
-            return;
         }
         for (int i = 0; i < studentId.length(); i++) {
             if (!Character.isDigit(studentId.charAt(i))) {
-                isNumber = false;
-                break;
+                request.setAttribute("message", "you must enter a positive number");
+                chain.doFilter(request, response);
+                return;
             }
         }
-        if (isNumber) {
-            chain.doFilter(request, response);
+        chain.doFilter(request, response);
 
-        } else {
-            request.setAttribute("message", "you must enter positive numbers");
-            request.getRequestDispatcher("updatestudent.jsp").forward(request, response);
-        }
         if (debug) {
             log("SearchStudentByIdFilter:doFilter()");
         }

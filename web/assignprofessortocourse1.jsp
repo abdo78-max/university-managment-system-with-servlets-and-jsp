@@ -19,6 +19,11 @@
             <input type="hidden" name="action" value="assign">
 
             <input type="submit" value="submit">
+                 <%String message = (String) request.getAttribute("message");
+                if (message != null) {%>
+
+            <label> <%=message%></label>
+            <%}%>
         </form>
     </body>
 </html>

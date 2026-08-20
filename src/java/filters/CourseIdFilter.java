@@ -97,26 +97,18 @@ public class CourseIdFilter implements Filter {
             FilterChain chain)
             throws IOException, ServletException {
         String courseId = request.getParameter("courseid");
-        if (courseId == null||courseId.trim().isEmpty()) {
+        if (courseId == null || courseId.trim().isEmpty()) {
             request.setAttribute("message", "you must enter positive numbers");
-            request.getRequestDispatcher("updatecourse.jsp").forward(request, response);
-            return;
         }
         boolean isNumber = true;
         for (int i = 0; i < courseId.length(); i++) {
             if (!Character.isDigit(courseId.charAt(i))) {
-                isNumber = false;
-                break;
+                request.setAttribute("message", "you must enter positive numbers");
+                chain.doFilter(request, response);
+                return;
             }
         }
-        if (isNumber) {
-            chain.doFilter(request, response);
-
-        } else {
-            request.setAttribute("message", "you must enter positive numbers");
-            request.getRequestDispatcher("updatecourse.jsp").forward(request, response);
-
-        }
+        chain.doFilter(request, response);
         if (debug) {
             log("CourseIdFilter:doFilter()");
         }

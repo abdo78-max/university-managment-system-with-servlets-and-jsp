@@ -16,6 +16,11 @@
         <form action="SearchProfessorById" action="GET">
             <input type="hidden" name="action" value="delete" />
             professor id : <input type="text" name="professorid" value="" />
+            <%String message = (String) request.getAttribute("message");
+                     if (message != null) {%>
+
+            <label> <%=message%></label>
+            <%}%>
             <input type="submit" value="submit" />
         </form>
     </body>

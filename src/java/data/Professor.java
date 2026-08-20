@@ -62,6 +62,16 @@ public class Professor extends Person {
         this.courses = courses;
     }
 
+    public Professor(int id, String name, LocalDate birthDate) {
+        super(id, name, birthDate);
+    }
+
+    public Professor(String specialization, int id, String name, String email, LocalDate birthDate, String phone) {
+        super(id, name, email, birthDate, phone);
+        this.specialization = specialization;
+    }
+
+
     @Override
     public String toString() {
         String coursesName = "";

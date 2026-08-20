@@ -22,6 +22,11 @@
                 session.removeAttribute("message");
             %>
             <%}%>
+            <%String message2 = (String) request.getAttribute("message");
+                       if (message2 != null) {%>
+
+            <label> <%=message2%></label>
+            <%}%>
         </form>
     </body>
 </html>

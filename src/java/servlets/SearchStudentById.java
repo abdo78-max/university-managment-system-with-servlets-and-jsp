@@ -33,6 +33,11 @@ public class SearchStudentById extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         Connection connect = (Connection) getServletContext().getAttribute("db connection");
         String studentId = request.getParameter("studentid");
+        String message = (String) request.getAttribute("message");
+        if (message != null) {
+            request.getRequestDispatcher("updatestudent.jsp").forward(request, response);
+            return;
+        }
         StudentDao studentDao = new StudentDao(connect);
         Student student = new Student(Integer.parseInt(studentId));
         Student selectedStudent = studentDao.searchStudentById(student);
@@ -40,7 +45,6 @@ public class SearchStudentById extends HttpServlet {
             request.getSession().setAttribute("student", selectedStudent);
             request.getRequestDispatcher("updatestudent2.jsp").forward(request, response);
         } else {
-            request.setAttribute("message", "student is not found");
             request.getRequestDispatcher("updatestudent.jsp").forward(request, response);
         }
 

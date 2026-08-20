@@ -5,15 +5,12 @@
 package servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.util.Set;
 
 import dao.ProfessorDao;
-import dao.StudentDao;
 import data.Course;
 import data.Professor;
-import data.Student;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;

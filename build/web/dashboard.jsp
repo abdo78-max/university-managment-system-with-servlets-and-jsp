@@ -39,6 +39,10 @@
     <a href="searchprofessor.jsp" style="text-align: center;">search professor here</a><br><br>    
     <a href="searchcourse.jsp" style="text-align: center;">search course here</a><br><br>    
     <a href="deleteteaching.jsp" style="text-align: center;">delete professor's teaching course here</a><br><br>    
+    <a href="searchenrollmentbystudentid.jsp" style="text-align: center;">search enrollment by student id here</a><br><br>    
+    <a href="searchenrollmentbycourseid.jsp" style="text-align: center;">search enrollment by course id here</a><br><br>    
+    <a href="searchteachingbyprofessorid.jsp" style="text-align: center;">get professor's courses here</a><br><br>    
+    <a href="searchteachingbycourseid.jsp" style="text-align: center;">Get courses that are taught by any professor</a><br><br>    
 
 </head>
 <body>

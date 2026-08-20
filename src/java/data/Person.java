@@ -47,6 +47,23 @@ public abstract class Person {
         return name;
     }
 
+    public Person(int id, String name, String email, LocalDate birthDate, String phone) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.birthDate = birthDate;
+        this.phone = phone;
+    }
+
+    public Person(int id, String name, LocalDate birthDate, String phone) {
+        this.id = id;
+        this.name = name;
+        this.birthDate = birthDate;
+        this.phone = phone;
+    }
+
+  
+
     public void setName(String name) {
         this.name = name;
     }
@@ -70,6 +87,12 @@ public abstract class Person {
 
     public String getEmail() {
         return email;
+    }
+
+    public Person(int id, String name, LocalDate birthDate) {
+        this.id = id;
+        this.name = name;
+        this.birthDate = birthDate;
     }
 
     public void setEmail(String email) {

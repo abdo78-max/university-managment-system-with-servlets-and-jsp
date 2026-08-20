@@ -40,7 +40,7 @@ public class DeleteEnrollmentServlet extends HttpServlet {
         Course course = new Course(Integer.parseInt(courseId));
         Enrollment enrollment = new Enrollment(student, course);
         EnrollmentDao enrollmentDao = new EnrollmentDao(connect);
-        int resEnroll = enrollmentDao.DeleteEnrollment(enrollment);
+        int resEnroll = enrollmentDao.deleteEnrollment(enrollment);
         if (resEnroll == 1) {
             request.getSession().setAttribute("message", "you successed to delete your enrolled course");
         } else {

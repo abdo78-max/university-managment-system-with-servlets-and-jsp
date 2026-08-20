@@ -1,6 +1,6 @@
 <%-- 
-    Document   : deleteteaching
-    Created on : Aug 17, 2026, 12:22:38 PM
+    Document   : searchteachinbyprofessorid
+    Created on : Aug 20, 2026, 5:50:13 PM
     Author     : Compu City
 --%>
 
@@ -9,19 +9,17 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>enter id to delete professor's courses</title>
+        <title>enter professor id here</title>
     </head>
     <body>
-
-        <form action="SearchProfessorById" action="GET">
-            <input type="hidden" name="action" value="delete" />
+        <form action="SearchTeachingByProfessorIdServlet" method="GET">
             professor id : <input type="text" name="professorid" value="" />
+            <input type="submit" value="submit" />
             <%String message = (String) request.getAttribute("message");
-                     if (message != null) {%>
+                if (message != null) {%>
 
             <label> <%=message%></label>
             <%}%>
-            <input type="submit" value="submit" />
         </form>
     </body>
 </html>

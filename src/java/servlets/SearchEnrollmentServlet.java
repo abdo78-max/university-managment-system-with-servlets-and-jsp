@@ -40,7 +40,7 @@ public class SearchEnrollmentServlet extends HttpServlet {
         Course course = new Course(Integer.parseInt(courseId));
         Enrollment enrollment = new Enrollment(student, course);
         EnrollmentDao enrollmentDao = new EnrollmentDao(connect);
-        Enrollment selectedEnrollment = enrollmentDao.SearchEnrollment(enrollment);
+        Enrollment selectedEnrollment = enrollmentDao.searchEnrollment(enrollment);
         if (selectedEnrollment != null) {
             request.getSession().setAttribute("enrollment", selectedEnrollment);
             request.getRequestDispatcher("updateenrollment2.jsp").forward(request, response);

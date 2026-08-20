@@ -32,6 +32,11 @@ public class DeleteStudentServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         Connection connect = (Connection) getServletContext().getAttribute("db connection");
+        String message = (String) request.getAttribute("message");
+        if (message != null) {
+            request.getRequestDispatcher("deletestudent.jsp").forward(request, response);
+            return;
+        }
         String studentId = request.getParameter("studentid");
         StudentDao studentDao = new StudentDao(connect);
         Student student = new Student(Integer.parseInt(studentId));
