@@ -13,12 +13,12 @@
     </head>
     <body>
         <form action = "SearchProfessorById" method="GET">
-                        <input type="hidden" name="action" value="update">
+            <input type="hidden" name="action" value="updateprofessor">
 
             professor id:<input type="text" name="professorid" value="" /><input type="submit" value="applyid" /><br><br>
-            
+
             <%String message = (String) request.getAttribute("message");
-                            if (message != null) {%>
+                if (message != null) {%>
             <label> <%=message%></label>
             <%}%>
         </form>

@@ -42,7 +42,7 @@ public class SearchProfessorById extends HttpServlet {
                 request.getRequestDispatcher("updateteaching.jsp").forward(request, response);
             } else if ("delete".equals(action)) {
                 request.getRequestDispatcher("deleteteaching.jsp").forward(request, response);
-            } else {
+            } else if ("updateprofessor".equals(action)) {
                 request.getRequestDispatcher("updateprofessor.jsp").forward(request, response);
 
             }
@@ -59,12 +59,22 @@ public class SearchProfessorById extends HttpServlet {
                 request.getRequestDispatcher("GetProfessorCoursesServlet").forward(request, response);
             } else if ("delete".equalsIgnoreCase(action)) {
                 request.getRequestDispatcher("GetProfessorCoursesServlet").forward(request, response);
-            } else {
+            } else if ("updateprofessor".equals(action)) {
                 request.getRequestDispatcher("updateprofessor2.jsp").forward(request, response);
             }
         } else {
             request.setAttribute("message", "professor is not found");
-            request.getRequestDispatcher("updateprofessor.jsp").forward(request, response);
+            if ("assign".equalsIgnoreCase(action)) {
+                request.getRequestDispatcher("assignprofessortocourse1.jsp").forward(request, response);
+            } else if ("updateprofessorteachingcourse".equals(action)) {
+                request.getRequestDispatcher("updateteaching.jsp").forward(request, response);
+            } else if ("delete".equals(action)) {
+                request.getRequestDispatcher("deleteteaching.jsp").forward(request, response);
+            } else if ("updateprofessor".equals(action)) {
+                request.getRequestDispatcher("updateprofessor.jsp").forward(request, response);
+
+            }
+
         }
 //        try (PrintWriter out = response.getWriter()) {
 //            /* TODO output your page here. You may use following sample code. */

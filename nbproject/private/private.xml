@@ -15,6 +15,68 @@
             <file>file:/G:/UniversityManagmentSystem%20-%20Copy/web/dashboard.jsp</file>
             <file>file:/G:/UniversityManagmentSystem%20-%20Copy/src/java/dao/ProfessorDao.java</file>
             <file>file:/G:/UniversityManagmentSystem%20-%20Copy/src/java/filters/DashBoardFilter.java</file>
+            <file>file:/G:/UniversityManagmentSystem%20-%20Copy/web/WEB-INF/web.xml</file>
+            <file>file:/G:/UniversityManagmentSystem%20-%20Copy/web/deletecourse.jsp</file>
+            <file>file:/G:/UniversityManagmentSystem%20-%20Copy/web/stack-diplomas-antique-bookshelf-background-generated-by-ai.jpg</file>
+            <file>file:/G:/UniversityManagmentSystem%20-%20Copy/web/updatecourse.jsp</file>
+            <file>file:/G:/UniversityManagmentSystem%20-%20Copy/src/java/servlets/LogInServlet.java</file>
+            <file>file:/G:/UniversityManagmentSystem%20-%20Copy/web/assignprofessortocourse1.jsp</file>
+            <file>file:/G:/UniversityManagmentSystem%20-%20Copy/web/searchenrollmentbystudentid.jsp</file>
+            <file>file:/G:/UniversityManagmentSystem%20-%20Copy/src/java/dao/StudentDao.java</file>
+            <file>file:/G:/UniversityManagmentSystem%20-%20Copy/src/java/servlets/DeleteEnrollmentServlet.java</file>
+            <file>file:/G:/UniversityManagmentSystem%20-%20Copy/src/java/servlets/SearchEnrollmentServlet.java</file>
+            <file>file:/G:/UniversityManagmentSystem%20-%20Copy/src/java/dao/CourseDao.java</file>
+            <file>file:/G:/UniversityManagmentSystem%20-%20Copy/src/java/servlets/SearchEnrollmentByStudentIdServlet.java</file>
+            <file>file:/G:/UniversityManagmentSystem%20-%20Copy/src/java/data/Student.java</file>
+            <file>file:/G:/UniversityManagmentSystem%20-%20Copy/src/java/servlets/SearchStudentById.java</file>
+            <file>file:/G:/UniversityManagmentSystem%20-%20Copy/src/java/data/Enrollment.java</file>
+            <file>file:/G:/UniversityManagmentSystem%20-%20Copy/web/searchenrollmentbystudentidandcourseid2.jsp</file>
+            <file>file:/G:/UniversityManagmentSystem%20-%20Copy/src/java/servlets/GetStudentCoursesServlet.java</file>
+            <file>file:/G:/UniversityManagmentSystem%20-%20Copy/src/java/servlets/GetProfessorCoursesServlet.java</file>
+            <file>file:/G:/UniversityManagmentSystem%20-%20Copy/src/java/servlets/UpdateCourseServlet.java</file>
+            <file>file:/G:/UniversityManagmentSystem%20-%20Copy/src/java/servlets/UpdateStudentServlet.java</file>
+            <file>file:/G:/UniversityManagmentSystem%20-%20Copy/src/java/servlets/UpdateTeachingServlet.java</file>
+            <file>file:/G:/UniversityManagmentSystem%20-%20Copy/src/java/filters/StudentAndProfFilter.java</file>
+            <file>file:/G:/UniversityManagmentSystem%20-%20Copy/src/java/filters/SearchStudentByIdFilter.java</file>
+            <file>file:/G:/UniversityManagmentSystem%20-%20Copy/web/searchstudent.jsp</file>
+            <file>file:/G:/UniversityManagmentSystem%20-%20Copy/web/updatestudent.jsp</file>
+            <file>file:/G:/UniversityManagmentSystem%20-%20Copy/web/searchstudent2.jsp</file>
+            <file>file:/G:/UniversityManagmentSystem%20-%20Copy/src/java/data/Course.java</file>
+            <file>file:/G:/UniversityManagmentSystem%20-%20Copy/web/updatecourse2.jsp</file>
+            <file>file:/G:/UniversityManagmentSystem%20-%20Copy/web/enrollment.jsp</file>
+            <file>file:/G:/UniversityManagmentSystem%20-%20Copy/web/updateprofessor2.jsp</file>
+            <file>file:/G:/UniversityManagmentSystem%20-%20Copy/web/updatestudent2.jsp</file>
+            <file>file:/G:/UniversityManagmentSystem%20-%20Copy/web/updateteaching2.jsp</file>
+            <file>file:/G:/UniversityManagmentSystem%20-%20Copy/web/updateteaching.jsp</file>
+            <file>file:/G:/UniversityManagmentSystem%20-%20Copy/src/java/servlets/AddEnrollmentServlet.java</file>
+            <file>file:/G:/UniversityManagmentSystem%20-%20Copy/src/java/servlets/SignUpServlet.java</file>
+            <file>file:/G:/UniversityManagmentSystem%20-%20Copy/web/searchenrollmentbycourseid.jsp</file>
+            <file>file:/G:/UniversityManagmentSystem%20-%20Copy/src/java/filters/CourseFilter.java</file>
+            <file>file:/G:/UniversityManagmentSystem%20-%20Copy/src/java/servlets/SearchEnrollmentByCourseIdServlet.java</file>
+            <file>file:/G:/UniversityManagmentSystem%20-%20Copy/src/java/servlets/SearchProfessorById.java</file>
+            <file>file:/G:/UniversityManagmentSystem%20-%20Copy/src/java/filters/CourseIdFilter.java</file>
+            <file>file:/G:/UniversityManagmentSystem%20-%20Copy/src/java/data/Teaching.java</file>
+            <file>file:/G:/UniversityManagmentSystem%20-%20Copy/src/java/data/Person.java</file>
+            <file>file:/G:/UniversityManagmentSystem%20-%20Copy/src/java/data/Professor.java</file>
+            <file>file:/G:/UniversityManagmentSystem%20-%20Copy/web/searchteachingbyprofessorid.jsp</file>
+            <file>file:/G:/UniversityManagmentSystem%20-%20Copy/web/searchteachingbycourseid.jsp</file>
+            <file>file:/G:/UniversityManagmentSystem%20-%20Copy/web/searchteachingbyprofessoridandcourseid2.jsp</file>
+            <file>file:/G:/UniversityManagmentSystem%20-%20Copy/src/java/servlets/SearchTeachingByProfessorIdServlet.java</file>
+            <file>file:/G:/UniversityManagmentSystem%20-%20Copy/web/updateprofessor.jsp</file>
+            <file>file:/G:/UniversityManagmentSystem%20-%20Copy/src/java/servlets/UpdateProfessorServlet.java</file>
+            <file>file:/G:/UniversityManagmentSystem%20-%20Copy/web/deletestudent.jsp</file>
+            <file>file:/G:/UniversityManagmentSystem%20-%20Copy/web/deleteprofessor.jsp</file>
+            <file>file:/G:/UniversityManagmentSystem%20-%20Copy/src/java/servlets/SearchTeachingByCourseId.java</file>
+            <file>file:/G:/UniversityManagmentSystem%20-%20Copy/web/assignprofessortocourse2.jsp</file>
+            <file>file:/G:/UniversityManagmentSystem%20-%20Copy/src/java/servlets/AssignProfessorToCourseServlet.java</file>
+            <file>file:/G:/UniversityManagmentSystem%20-%20Copy/web/deleteteaching.jsp</file>
+            <file>file:/G:/UniversityManagmentSystem%20-%20Copy/src/java/filters/LogInFilter.java</file>
+            <file>file:/G:/UniversityManagmentSystem%20-%20Copy/src/java/filters/SignUpFilter.java</file>
+            <file>file:/G:/UniversityManagmentSystem%20-%20Copy/web/professor.jsp</file>
+            <file>file:/G:/UniversityManagmentSystem%20-%20Copy/src/java/servlets/DeleteCourseServlet.java</file>
+            <file>file:/G:/UniversityManagmentSystem%20-%20Copy/src/java/servlets/DeleteStudentServlet.java</file>
+            <file>file:/G:/UniversityManagmentSystem%20-%20Copy/src/java/servlets/DeleteProfessorServlet.java</file>
+            <file>file:/G:/UniversityManagmentSystem%20-%20Copy/web/deleteteaching2.jsp</file>
         </group>
     </open-files>
 </project-private>
