@@ -44,7 +44,7 @@ public class DeleteStudentServlet extends HttpServlet {
         if (resStudent == 1) {
             request.getSession().setAttribute("message", "you successed to delete this student");
         } else {
-            request.getSession().setAttribute("message", "you failed to delete this student");
+            request.getSession().setAttribute("message", "student not found");
         }
 
         response.sendRedirect("deletestudent.jsp");

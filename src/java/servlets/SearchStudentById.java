@@ -45,6 +45,7 @@ public class SearchStudentById extends HttpServlet {
             request.getSession().setAttribute("student", selectedStudent);
             request.getRequestDispatcher("updatestudent2.jsp").forward(request, response);
         } else {
+            request.setAttribute("message", "student not found");
             request.getRequestDispatcher("updatestudent.jsp").forward(request, response);
         }
 

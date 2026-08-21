@@ -14,6 +14,12 @@ public class Enrollment {
 
     private int enrollmentId;
     private Student student;
+
+    public Enrollment(Student student, Course course, double mark) {
+        this.student = student;
+        this.course = course;
+        this.mark = mark;
+    }
     private Course course;
     private LocalDate enrollmentDate;
     private double mark;

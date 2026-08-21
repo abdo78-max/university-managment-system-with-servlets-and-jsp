@@ -40,12 +40,11 @@ public class DeleteCourseServlet extends HttpServlet {
         }
         CourseDao courseDao = new CourseDao(connect);
         Course course = new Course(Integer.parseInt(courseId));
-
         int resCourse = courseDao.deleteCourse(course);
         if (resCourse == 1) {
             request.getSession().setAttribute("message", "you successed to delete this course");
         } else {
-            request.getSession().setAttribute("message", "you failed to delete this course");
+            request.getSession().setAttribute("message", "course is not found ");
         }
 
         response.sendRedirect("deletecourse.jsp");

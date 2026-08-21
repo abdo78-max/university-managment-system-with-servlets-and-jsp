@@ -46,12 +46,11 @@ public class EnrollmentDao {
 
     public int updateEnrollment(Enrollment enrollment, Course course) {
         int result = 0;
-        sql = "update `student-course` set courseid = ?,enrollmentdate=? where studentid=? and courseid=?";
+        sql = "update `student-course` set courseid = ? where studentid=? and courseid=?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setInt(1, course.getCourseId());
-            preparedStatement.setDate(2, java.sql.Date.valueOf(enrollment.getEnrollmentDate()));
-            preparedStatement.setInt(3, enrollment.getStudent().getId());
-            preparedStatement.setInt(4, enrollment.getCourse().getCourseId());
+            preparedStatement.setInt(2, enrollment.getStudent().getId());
+            preparedStatement.setInt(3, enrollment.getCourse().getCourseId());
             result = preparedStatement.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(EnrollmentDao.class.getName()).log(Level.SEVERE, null, ex);
@@ -161,5 +160,18 @@ public class EnrollmentDao {
             Logger.getLogger(EnrollmentDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+       public int updateMark(Enrollment enrollment, Course course) {
+        int result = 0;
+        sql = "update `student-course` set mark = ? where studentid=? and courseid=?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setDouble(1, enrollment.getMark());
+            preparedStatement.setInt(2, enrollment.getStudent().getId());
+            preparedStatement.setInt(3, enrollment.getCourse().getCourseId());
+            result = preparedStatement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(EnrollmentDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
     }
 }

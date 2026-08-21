@@ -5,7 +5,9 @@
 package dao;
 
 import data.Course;
+import data.Enrollment;
 import data.Professor;
+import data.Student;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.sql.ResultSet;
@@ -166,7 +168,7 @@ public class ProfessorDao {
         return count;
     }
 
-     public Set<Course> getProfessorCourses(Professor professor) {
+    public Set<Course> getProfessorCourses(Professor professor) {
         Set<Course> courses = new HashSet<>();
         sql = "select c.courseid,coursename from course c join `professor-course` pc on c.courseid=pc.courseid where pc.professorid=?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql);) {
@@ -174,8 +176,8 @@ public class ProfessorDao {
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
                     String courseName = resultSet.getString("coursename");
-                    int courseId=resultSet.getInt("courseid");
-                    courses.add(new Course(courseId,courseName));
+                    int courseId = resultSet.getInt("courseid");
+                    courses.add(new Course(courseId, courseName));
                 }
             }
         } catch (SQLException ex) {
@@ -183,5 +185,31 @@ public class ProfessorDao {
         }
 
         return courses;
+    }
+
+    public Set<Enrollment> getProfessorStudents(Professor professor, Student student) {
+        Set<Enrollment> enrollments = new HashSet<>();
+        sql = "select sc.studentid,coursename,sc.courseid,mark,studentname from `professor-course` pc join `student-course` sc on pc.courseid=sc.courseid join student s on sc.studentid=s.studentid join course c on c.courseid=sc.courseid where pc.professorid=? and sc.studentid=?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, professor.getId());
+            preparedStatement.setInt(2, student.getId());
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    int studentid = resultSet.getInt("studentid");
+                    String coursename = resultSet.getString("coursename");
+                    int courseid = resultSet.getInt("courseid");
+                    double mark = resultSet.getDouble("mark");
+                    String studentname = resultSet.getString("studentname");
+                    Student selectedStudent = new Student(studentid, studentname);
+                    Course course = new Course(courseid, coursename);
+                    Enrollment enrollment = new Enrollment(selectedStudent, course, mark);
+                    enrollments.add(enrollment);
+                }
+            }
+            return enrollments;
+        } catch (SQLException ex) {
+            Logger.getLogger(ProfessorDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 }

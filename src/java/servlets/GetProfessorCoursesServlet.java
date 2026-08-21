@@ -41,7 +41,11 @@ public class GetProfessorCoursesServlet extends HttpServlet {
         Set<Course> professorCourses = professorDao.getProfessorCourses(professor);
         professor.setCourses(professorCourses);
         request.getSession().setAttribute("professor", professor);
-         if ("delete".equalsIgnoreCase(action)) {
+        if (action==null) {
+            response.sendRedirect("professor.jsp");
+            return;
+        }
+        if ("delete".equalsIgnoreCase(action)) {
             response.sendRedirect("deleteteaching2.jsp");
             return;
         }

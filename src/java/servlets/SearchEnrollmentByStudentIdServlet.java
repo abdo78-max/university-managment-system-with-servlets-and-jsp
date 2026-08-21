@@ -45,13 +45,13 @@ public class SearchEnrollmentByStudentIdServlet extends HttpServlet {
         Enrollment enrollment = new Enrollment(student);
         EnrollmentDao enrollmentDao = new EnrollmentDao(connect);
         ArrayList<Enrollment> selectedEnrollments = enrollmentDao.searchEnrollmentByStudentId(enrollment);
-        if (selectedEnrollments != null) {
+        if (!selectedEnrollments.isEmpty()) {
             request.getSession().setAttribute("enrollments", selectedEnrollments);
+            request.getRequestDispatcher("searchenrollmentbystudentidandcourseid2.jsp").forward(request, response);
         } else {
             request.setAttribute("message", "the enrollments is empty");
             request.getRequestDispatcher("searchenrollmentbystudentid.jsp").forward(request, response);
         }
-        request.getRequestDispatcher("searchenrollmentbystudentidandcourseid2.jsp").forward(request, response);
 //        try (PrintWriter out = response.getWriter()) {
 //            /* TODO output your page here. You may use following sample code. */
 //            out.println("<!DOCTYPE html>");

@@ -4,21 +4,18 @@
  */
 package servlets;
 
-import data.User;
 import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import java.sql.Connection;
-import services.UserService;
 
 /**
  *
  * @author Compu City
  */
-public class LogInServlet extends HttpServlet {
+public class UpdateMarkServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,37 +29,17 @@ public class LogInServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        Connection connect = (Connection) getServletContext().getAttribute("db connection");
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        User user = new User(username, password);
-        UserService userService = new UserService(connect);
-        User loggedUser = userService.getUser(user);
-        HttpSession session = request.getSession();
-        if(loggedUser==null)
-        {
-            request.getSession().setAttribute("message","you should sign up first or enter username and password correctly");
-            response.sendRedirect("login.jsp");
-        }
-        else if (loggedUser.getStudent() != null) {
-            session.setAttribute("student", loggedUser.getStudent());
-            response.sendRedirect("ViewAllCoursesServlet");
-        } else if (loggedUser.getProfessor() != null) {
-            session.setAttribute("professor", loggedUser.getProfessor());
-            response.sendRedirect("GetProfessorCoursesServlet");
-        } else {
-            session.setAttribute("admin", loggedUser);
-            response.sendRedirect("ViewAllCoursesServlet");
-        }
+        String courseId=request.getParameter("courseid");
+        String mark=request.getParameter("mark");
 //        try (PrintWriter out = response.getWriter()) {
 //            /* TODO output your page here. You may use following sample code. */
 //            out.println("<!DOCTYPE html>");
 //            out.println("<html>");
 //            out.println("<head>");
-//            out.println("<title>Servlet LogInServlet</title>");
+//            out.println("<title>Servlet UpdateMarkServlet</title>");
 //            out.println("</head>");
 //            out.println("<body>");
-//            out.println("<h1>Servlet LogInServlet at " + request.getContextPath() + "</h1>");
+//            out.println("<h1>Servlet UpdateMarkServlet at " + request.getContextPath() + "</h1>");
 //            out.println("</body>");
 //            out.println("</html>");
 //        }

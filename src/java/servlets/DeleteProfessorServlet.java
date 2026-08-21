@@ -44,7 +44,7 @@ public class DeleteProfessorServlet extends HttpServlet {
         if (resProf == 1) {
             request.getSession().setAttribute("message", "you successed to delete this professor");
         } else {
-            request.getSession().setAttribute("message", "you failed to delete this professor");
+            request.getSession().setAttribute("message", "professor nor found");
         }
 
         response.sendRedirect("deleteprofessor.jsp");

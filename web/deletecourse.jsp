@@ -16,14 +16,13 @@
             course id:<input type="text" name="courseid" value="" /><input type="submit" value="applyid" /><br><br>
             <%String message = (String) session.getAttribute("message");
                 if (message != null) {%>
-
             <label> <%=message%></label>
             <%
                 session.removeAttribute("message");
             %>
             <%}%>
             <%String message2 = (String) request.getAttribute("message");
-                       if (message2 != null) {%>
+                if (message2 != null) {%>
 
             <label> <%=message2%></label>
             <%}%>

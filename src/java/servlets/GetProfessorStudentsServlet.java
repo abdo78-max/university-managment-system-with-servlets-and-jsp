@@ -4,21 +4,23 @@
  */
 package servlets;
 
-import data.User;
+import dao.ProfessorDao;
+import data.Enrollment;
+import data.Professor;
+import data.Student;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import java.sql.Connection;
-import services.UserService;
+import java.util.Set;
 
 /**
  *
  * @author Compu City
  */
-public class LogInServlet extends HttpServlet {
+public class GetProfessorStudentsServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,37 +34,33 @@ public class LogInServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        String action=request.getParameter("action");
+        String studentId = request.getParameter("studentid");
+        Student student = new Student(Integer.parseInt(studentId));
         Connection connect = (Connection) getServletContext().getAttribute("db connection");
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        User user = new User(username, password);
-        UserService userService = new UserService(connect);
-        User loggedUser = userService.getUser(user);
-        HttpSession session = request.getSession();
-        if(loggedUser==null)
-        {
-            request.getSession().setAttribute("message","you should sign up first or enter username and password correctly");
-            response.sendRedirect("login.jsp");
-        }
-        else if (loggedUser.getStudent() != null) {
-            session.setAttribute("student", loggedUser.getStudent());
-            response.sendRedirect("ViewAllCoursesServlet");
-        } else if (loggedUser.getProfessor() != null) {
-            session.setAttribute("professor", loggedUser.getProfessor());
-            response.sendRedirect("GetProfessorCoursesServlet");
+        ProfessorDao professorDao = new ProfessorDao(connect);
+        Professor professor = (Professor) request.getSession().getAttribute("professor");
+        Set<Enrollment> professorStudents = professorDao.getProfessorStudents(professor, student);
+        if (!professorStudents.isEmpty()) {
+            request.getSession().setAttribute("professorstudents", professorStudents);
+            if ("updatemark".equalsIgnoreCase(action)) {
+                request.getRequestDispatcher("updatemarkforstudent2.jsp").forward(request, response);
+                return;
+            }
+            request.getRequestDispatcher("professorstudents.jsp").forward(request, response);
         } else {
-            session.setAttribute("admin", loggedUser);
-            response.sendRedirect("ViewAllCoursesServlet");
+            request.setAttribute("message", "the student is not found");
+            request.getRequestDispatcher("searchstudentbyprofessor.jsp").forward(request, response);
         }
 //        try (PrintWriter out = response.getWriter()) {
 //            /* TODO output your page here. You may use following sample code. */
 //            out.println("<!DOCTYPE html>");
 //            out.println("<html>");
 //            out.println("<head>");
-//            out.println("<title>Servlet LogInServlet</title>");
+//            out.println("<title>Servlet GetProfessorStudentsServlet</title>");
 //            out.println("</head>");
 //            out.println("<body>");
-//            out.println("<h1>Servlet LogInServlet at " + request.getContextPath() + "</h1>");
+//            out.println("<h1>Servlet GetProfessorStudentsServlet at " + request.getContextPath() + "</h1>");
 //            out.println("</body>");
 //            out.println("</html>");
 //        }

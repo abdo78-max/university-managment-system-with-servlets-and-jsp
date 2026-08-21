@@ -48,6 +48,19 @@ public class SignUpServlet extends HttpServlet {
         String birthDate = request.getParameter("birthdate");
         String role = request.getParameter("role");
         Role userRole = Role.valueOf(role);
+        if (telephone.length() != 11) {
+            request.setAttribute("message", "phone should be numbers and 11 digits");
+            request.getRequestDispatcher("signup.jsp").forward(request, response);
+            return;
+        } else {
+            for (int i = 0; i < telephone.length(); i++) {
+                if (!Character.isDigit(telephone.charAt(i))) {
+                    request.setAttribute("message", "phone should be 11 only numbers");
+                    request.getRequestDispatcher("signup.jsp").forward(request, response);
+                    return;
+                }
+            }
+        }
         if (userRole == Role.PROFESSOR) {
             ProfessorDao professorDao = new ProfessorDao(connect);
             UserService userService = new UserService(connect);

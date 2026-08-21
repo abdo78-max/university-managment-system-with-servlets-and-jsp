@@ -50,9 +50,11 @@ public class UserDao {
                         Student selectedStudent = studentDao.searchStudentById(student);
                         return new User(username, password, selectedStudent, role);
                     } else if (professorId > 0) {
+                        ProfessorDao professorDao = new ProfessorDao(connection);
                         Professor professor = new Professor();
                         professor.setId(professorId);
-                        return new User(username, password, professor, role);
+                        Professor selectedProfessor = professorDao.searchProfessorById(professor);
+                        return new User(username, password, selectedProfessor, role);
                     } else {
                         User admin = new User(username, password);
                         admin.setRole(role);

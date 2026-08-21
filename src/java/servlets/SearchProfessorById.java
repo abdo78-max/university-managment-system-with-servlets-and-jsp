@@ -19,6 +19,32 @@ import java.sql.Connection;
  */
 public class SearchProfessorById extends HttpServlet {
 
+    String message = null;
+
+    public void forwardByAction(HttpServletRequest request, HttpServletResponse response, String action) throws ServletException, IOException {
+        if ("assign".equalsIgnoreCase(action)) {
+            if (message == null) {
+                request.setAttribute("message", "professor is not found");
+            }
+            request.getRequestDispatcher("assignprofessortocourse1.jsp").forward(request, response);
+        } else if ("updateprofessorteachingcourse".equals(action)) {
+            if (message == null) {
+                request.setAttribute("message", "professor is not found");
+            }
+            request.getRequestDispatcher("updateteaching.jsp").forward(request, response);
+        } else if ("delete".equals(action)) {
+            if (message == null) {
+                request.setAttribute("message", "professor is not found");
+            }
+            request.getRequestDispatcher("deleteteaching.jsp").forward(request, response);
+        } else if ("updateprofessor".equals(action)) {
+            if (message == null) {
+                request.setAttribute("message", "professor is not found");
+            }
+            request.getRequestDispatcher("updateprofessor.jsp").forward(request, response);
+        }
+    }
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -34,17 +60,12 @@ public class SearchProfessorById extends HttpServlet {
         Connection connect = (Connection) getServletContext().getAttribute("db connection");
         String professorId = request.getParameter("professorid");
         String action = request.getParameter("action");
-        String message = (String) request.getAttribute("message");
+        message = (String) request.getAttribute("message");
         if (message != null) {
-            if ("assign".equalsIgnoreCase(action)) {
-                request.getRequestDispatcher("assignprofessortocourse1.jsp").forward(request, response);
-            } else if ("updateprofessorteachingcourse".equals(action)) {
-                request.getRequestDispatcher("updateteaching.jsp").forward(request, response);
-            } else if ("delete".equals(action)) {
-                request.getRequestDispatcher("deleteteaching.jsp").forward(request, response);
-            } else if ("updateprofessor".equals(action)) {
-                request.getRequestDispatcher("updateprofessor.jsp").forward(request, response);
-
+            try {
+                forwardByAction(request, response, action);
+            } catch (ServletException | IOException exception) {
+                exception.printStackTrace();
             }
             return;
         }
@@ -55,26 +76,19 @@ public class SearchProfessorById extends HttpServlet {
             request.getSession().setAttribute("professor", selectedProfessor);
             if ("assign".equalsIgnoreCase(action)) {
                 request.getRequestDispatcher("assignprofessortocourse2.jsp").forward(request, response);
-            } else if ("updateprofessorteachingcourse".equals(action)) {
+            } else if ("updateprofessorteachingcourse".equalsIgnoreCase(action)) {
                 request.getRequestDispatcher("GetProfessorCoursesServlet").forward(request, response);
             } else if ("delete".equalsIgnoreCase(action)) {
                 request.getRequestDispatcher("GetProfessorCoursesServlet").forward(request, response);
-            } else if ("updateprofessor".equals(action)) {
+            } else if ("updateprofessor".equalsIgnoreCase(action)) {
                 request.getRequestDispatcher("updateprofessor2.jsp").forward(request, response);
             }
         } else {
-            request.setAttribute("message", "professor is not found");
-            if ("assign".equalsIgnoreCase(action)) {
-                request.getRequestDispatcher("assignprofessortocourse1.jsp").forward(request, response);
-            } else if ("updateprofessorteachingcourse".equals(action)) {
-                request.getRequestDispatcher("updateteaching.jsp").forward(request, response);
-            } else if ("delete".equals(action)) {
-                request.getRequestDispatcher("deleteteaching.jsp").forward(request, response);
-            } else if ("updateprofessor".equals(action)) {
-                request.getRequestDispatcher("updateprofessor.jsp").forward(request, response);
-
+            try {
+                forwardByAction(request, response, action);
+            } catch (ServletException | IOException exception) {
+                exception.printStackTrace();
             }
-
         }
 //        try (PrintWriter out = response.getWriter()) {
 //            /* TODO output your page here. You may use following sample code. */

@@ -46,7 +46,7 @@ public class SearchEnrollmentByCourseIdServlet extends HttpServlet {
         Enrollment enrollment = new Enrollment(course);
         EnrollmentDao enrollmentDao = new EnrollmentDao(connect);
         ArrayList<Enrollment> selectedEnrollments = enrollmentDao.searchEnrollmentByCourseId(enrollment);
-        if (selectedEnrollments != null) {
+        if (!selectedEnrollments.isEmpty()) {
             request.getSession().setAttribute("enrollments", selectedEnrollments);
             request.getRequestDispatcher("searchenrollmentbystudentidandcourseid2.jsp").forward(request, response);
         } else {

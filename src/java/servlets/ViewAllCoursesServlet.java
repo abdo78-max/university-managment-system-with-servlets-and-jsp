@@ -6,6 +6,7 @@ package servlets;
 
 import dao.CourseDao;
 import data.Course;
+import data.Professor;
 import data.Student;
 import data.User;
 import java.io.IOException;
@@ -44,7 +45,7 @@ public class ViewAllCoursesServlet extends HttpServlet {
             request.getRequestDispatcher("GetStudentCoursesServlet").forward(request, response);
         } else if (user != null) {
             request.getRequestDispatcher("CountServlet").forward(request, response);
-        }
+        } 
 //        try (PrintWriter out = response.getWriter()) {
 //            /* TODO output your page here. You may use following sample code. */
 //            out.println("<!DOCTYPE html>");

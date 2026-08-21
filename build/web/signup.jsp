@@ -21,6 +21,11 @@
             name: <input type="text" name="name" value="" /><br><br>
             email:<input type="text" name="email" value="" /><br><br>
             telephone:<input type="text" name="telephone" value="" /><br><br>
+            <%String message = (String) request.getAttribute("message");
+                if (message != null) {%>
+
+            <label> <%=message%></label>
+            <%}%><br>
             address:<input type="text" name="address" value="" /><br><br>
             <label for="birthdate">Birth date</label>
             <input type="date" id="birthdate" name="birthdate"><br><br>

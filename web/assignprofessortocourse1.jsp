@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>write professor id here</title>
     </head>
     <body>
         <form action="SearchProfessorById" method="GET">
@@ -19,10 +19,14 @@
             <input type="hidden" name="action" value="assign">
 
             <input type="submit" value="submit">
-                 <%String message = (String) request.getAttribute("message");
+            <%String message = (String) request.getAttribute("message");
                 if (message != null) {%>
 
             <label> <%=message%></label>
+            <%}%>
+            <%String message2 = (String) request.getAttribute("message2");
+                if (message2 != null) {%>
+            <label> <%=message2%></label>
             <%}%>
         </form>
     </body>

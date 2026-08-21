@@ -32,6 +32,11 @@ public class SearchCourseById extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         Connection connect = (Connection) getServletContext().getAttribute("db connection");
+        String message = (String) request.getAttribute("message");
+        if (message != null) {
+            request.getRequestDispatcher("updatecourse.jsp").forward(request, response);
+            return;
+        }
         String courseId = request.getParameter("courseid");
         CourseDao courseDao = new CourseDao(connect);
         Course course = new Course(Integer.parseInt(courseId));

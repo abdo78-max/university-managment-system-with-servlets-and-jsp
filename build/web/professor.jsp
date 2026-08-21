@@ -4,6 +4,7 @@
     Author     : Compu City
 --%>
 
+<%@page import="data.Student"%>
 <%@page import="java.util.Set"%>
 <%@page import="data.Course"%>
 <%@page import="data.Professor"%>
@@ -15,7 +16,8 @@
         <title>professor page</title>
     </head>
     <body>
-        professor name:${professor.name}
+        professor id:${professor.id}<br><br>
+        professor name:${professor.name}<br><br>
         courses:<%
             Professor professor = (Professor) session.getAttribute("professor");
             Set<Course> courses = professor.getCourses();
@@ -28,5 +30,7 @@
         <%
             }
         %><br><br>
+        <a href="searchstudentbyprofessor.jsp" style="text-align: center;">search student here</a><br><br>    
+        <a href="updatemarkforstudent.jsp" style="text-align: center;">update mark</a><br><br>    
     </body>
 </html>
