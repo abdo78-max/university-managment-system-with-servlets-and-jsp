@@ -176,6 +176,10 @@
         <filter-name>CourseIdFilter</filter-name>
         <servlet-name>DeleteCourseServlet</servlet-name>
     </filter-mapping>
+    <filter-mapping>
+        <filter-name>SearchStudentByIdFilter</filter-name>
+        <servlet-name>GetProfessorStudentsServlet</servlet-name>
+    </filter-mapping>
     <listener>
         <description>ServletContextListener</description>
         <listener-class>listeners.DatabaseListener</listener-class>

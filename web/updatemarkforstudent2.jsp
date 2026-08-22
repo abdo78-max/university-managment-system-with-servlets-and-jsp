@@ -14,24 +14,24 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <form action="UpdateMarkServlet" method="GET">
-        course name : <select name="courseid">
-            <%
-                Set<Enrollment> studentCourses = (Set<Enrollment>) session.getAttribute("professorstudents");
+        <form action="GetProfessorStudentsServlet" method="GET">
+            <input type="hidden" name="action" value="updatemark2" />
+            student id : <input type="text" name="studentid" value="${student.id}" readonly="readonly" /><br><br>
+            course name : <select name="courseid">
+                <%
+                    Set<Enrollment> studentCourses = (Set<Enrollment>) session.getAttribute("professorstudents");
 
-                for (Enrollment enrollment : studentCourses) {
-            %>
+                    for (Enrollment enrollment : studentCourses) {
+                %>
 
-            <option value="<%=enrollment.getCourse().getCourseId()%>">
-                <%=enrollment.getCourse().getCourseName()%>
-            </option>
+                <option value="<%=enrollment.getCourse().getCourseId()%>">
+                    <%=enrollment.getCourse().getCourseName()%>
+                </option>
 
-            <%
-                }
-            %>
-        </select><br><br>
-        mark:<input type="text" name="mark" value="${enrollment.mark}" /><br><br>
-        <input type="submit" value="submit" />
+                <%
+                    }
+                %>
+            <input type="submit" value="submit" />
         </form>
     </body>
 </html>

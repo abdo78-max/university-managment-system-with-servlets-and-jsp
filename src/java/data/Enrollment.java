@@ -58,6 +58,9 @@ public class Enrollment {
         this.course = course;
     }
 
+    public Enrollment() {
+    }
+
     public int getEnrollmentId() {
         return enrollmentId;
     }

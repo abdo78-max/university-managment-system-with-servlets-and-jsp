@@ -5,6 +5,7 @@
 package servlets;
 
 import dao.ProfessorDao;
+import data.Course;
 import data.Enrollment;
 import data.Professor;
 import data.Student;
@@ -34,9 +35,16 @@ public class GetProfessorStudentsServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String action=request.getParameter("action");
+        String action = request.getParameter("action");
         String studentId = request.getParameter("studentid");
+        String message=(String) request.getAttribute("message");
+        if(message!=null)
+        {
+            request.getRequestDispatcher("searchstudentbyprofessor.jsp").forward(request, response);
+            return;
+        }
         Student student = new Student(Integer.parseInt(studentId));
+        String CourseId = request.getParameter("courseid");
         Connection connect = (Connection) getServletContext().getAttribute("db connection");
         ProfessorDao professorDao = new ProfessorDao(connect);
         Professor professor = (Professor) request.getSession().getAttribute("professor");
@@ -44,7 +52,21 @@ public class GetProfessorStudentsServlet extends HttpServlet {
         if (!professorStudents.isEmpty()) {
             request.getSession().setAttribute("professorstudents", professorStudents);
             if ("updatemark".equalsIgnoreCase(action)) {
+                request.getSession().setAttribute("student", student);
                 request.getRequestDispatcher("updatemarkforstudent2.jsp").forward(request, response);
+                return;
+            } else if ("updatemark2".equalsIgnoreCase(action)) {
+                Course course = new Course(Integer.parseInt(CourseId));
+                for (Enrollment enrollment : professorStudents) {
+                    if (enrollment.getCourse().getCourseId() == course.getCourseId()) {
+                        double mark = enrollment.getMark();
+                        request.getSession().setAttribute("enrollmentmark", mark);
+                        break;
+                    }
+                }
+                request.getSession().setAttribute("course", course);
+                request.getSession().setAttribute("student", student);
+                response.sendRedirect("updatemarkforstudent3.jsp");
                 return;
             }
             request.getRequestDispatcher("professorstudents.jsp").forward(request, response);
